@@ -41,7 +41,7 @@ chrome: build/manifest.json
 	rm "$(GIT_ROOT)/dist/key.pem"
 
 firefox: build/manifest.json
-	web-ext build \
+	node_modules/.bin/web-ext build \
 		--source-dir build/ \
 		--artifacts-dir="$(GIT_ROOT)/dist/" \
 		--no-input \
