@@ -4,19 +4,11 @@ language: node
 node_js:
   - "node"
 
-# APT is required to install Chrome
-addons:
-  apt:
-    update: true
-
 # Cache yarn
 cache:
   yarn: true
 
 before_install:
-  # Install Chrome, required to build an XPI file
-  - sudo apt-get install -y chromium
-
   # Install NodeJS
   - nvm install node
   - npm install -g yarn
