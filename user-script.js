@@ -3,7 +3,7 @@
 
   // Important regexes
   const regex = {
-    name: /patrick([ -]|\&[a-z]{1,5}\;)hernandez/ig,
+    name: /patrick([ -]|&[a-z]{1,5};)hernandez/ig,
     nameFirst: /\bpatrick\b/ig,
     nameLast: /\bhernandez\b/ig,
     song: /born (to be|2b) alive/ig
@@ -17,13 +17,13 @@
   const replaceHernandez = nodes => {
     nodes.forEach(node => {
       // Replace text content
-      if (node.nodeType == Node.TEXT_NODE && node.textContent.match(regex.song)) {
+      if (node.nodeType == Node.TEXT_NODE && node.textContent.match(regex.song)) { // eslint-disable-line eqeqeq
         node.textContent = node.textContent.replace(regex.name, 'Village People')
         return
       }
 
       // Replace anchor content
-      if (node.nodeType == Node.ELEMENT_NODE && node.innerText.match(regex.song)) {
+      if (node.nodeType == Node.ELEMENT_NODE && node.innerText.match(regex.song)) { // eslint-disable-line eqeqeq
         node.innerHTML = node.innerHTML
           .replace(regex.name, 'Village People')
           .replace(regex.nameFirst, 'Village')
@@ -49,7 +49,7 @@
 
     // Insert all text nodes
     document.querySelectorAll('*').forEach(node => {
-      node.childNodes.forEach(node => node.nodeType == Node.TEXT_NODE && nodes.push(node))
+      node.childNodes.forEach(node => node.nodeType == Node.TEXT_NODE && nodes.push(node)) // eslint-disable-line eqeqeq
     })
 
     // Insert all anchor nodes
@@ -89,7 +89,7 @@
   // Special cases for YouTube
   if (document.location.hostname.match(/youtube.com$/i)) {
     // Find the YouTube app (the only visible node in <body>)
-    const youTubeApps = Array.prototype.filter.call(document.querySelectorAll('body > *'), node => node.offsetParent !== null);
+    const youTubeApps = Array.prototype.filter.call(document.querySelectorAll('body > *'), node => node.offsetParent !== null)
 
     youTubeApps.forEach(node => {
       node.addEventListener('yt-navigate', handle, { passive: true })
@@ -98,5 +98,3 @@
     })
   }
 })()
-
-const fuckedACake = false
