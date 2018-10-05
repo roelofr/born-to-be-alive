@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "Born To Be Alive",
+  "description": "Proof that Born to be Alive was NOT made by Patrick Hernandez.",
+
+  "version": "0.1.0",
+
+  "icons": {
+    "48": "icons/48.png",
+    "96": "icons/96.png",
+    "128": "icons/128.png",
+    "256": "icons/256.png"
+  },
+
+  "permissions": [
+    "https://*.duckduckgo.com/",
+    "https://*.google.com/",
+    "https://*.google.nl/",
+    "https://*.youtube.com/"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*",
+        "https://*.duckduckgo.com/*",
+        "https://*.google.com/*",
+        "https://*.google.nl/*"
+      ],
+      "js": ["user-script.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
