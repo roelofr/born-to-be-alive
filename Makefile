@@ -27,18 +27,11 @@ chrome: build/manifest.json
 	# Make build dir
 	test -d "$(GIT_ROOT)/dist" || mkdir "$(GIT_ROOT)/dist"
 
-	# Write private key
-	test -f "$(GIT_ROOT)/dist/key.pem" || echo "$${CHROME_KEY}" > "$(GIT_ROOT)/dist/key.pem"
-
 	# Build crx
 	node_modules/.bin/crx pack \
 		--output="$(GIT_ROOT)/dist/born-to-be-alive.crx" \
-		--private-key="$(GIT_ROOT)/dist/key.pem" \
 		--zip-output="/tmp/born-to-be-alive-chrome.zip" \
 		"$(GIT_ROOT)/build"
-
-	# Remove key
-	rm "$(GIT_ROOT)/dist/key.pem"
 
 	# Test if file exists
 	test -f "$(GIT_ROOT)/dist/born-to-be-alive.crx"
