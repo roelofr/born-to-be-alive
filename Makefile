@@ -40,6 +40,9 @@ chrome: build/manifest.json
 	# Remove key
 	rm "$(GIT_ROOT)/dist/key.pem"
 
+	# Test if file exists
+	test -f "$(GIT_ROOT)/dist/born-to-be-alive.crx"
+
 firefox: build/manifest.json
 	node_modules/.bin/web-ext build \
 		--source-dir build/ \
