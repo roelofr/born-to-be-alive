@@ -19,7 +19,7 @@ before_install:
 
   # Install NodeJS
   - nvm install node
-  - npm install -g yarn web-ext
+  - npm install -g yarn
 
 install:
   # Download Yarn assets using lockfile
@@ -36,7 +36,11 @@ script:
   - make firefox
 
   # Copy release files
-  - mv "$( git rev-parse --show-toplevel 2>/dev/null)"/dist/*.zip "$( git rev-parse --show-toplevel 2>/dev/null)"
+  - mv "$( git rev-parse --show-toplevel 2>/dev/null)"/../dist/*.{zip,crx} "$( git rev-parse --show-toplevel 2>/dev/null)"
+
+  # Rename files as <name>-unsigned
+  - mv "./born-to-be-alive-*.zip" "./born-to-be-alive--unsigned.zip"
+  - mv "./born-to-be-alive.crx" "./born-to-be-alive--unsigned.crx"
 
 matrix:
   fast_finish: true
@@ -46,8 +50,8 @@ deploy:
   api_key:
     secure: OLJXPBOPIffi0nr+md8WePZB0BCmlQ6+AE8mIdDmvG4f62JpgyEPW/VVThMN+53jEGGP8FZUKDtAP+6Rb4WUNtF8NNYb6vD0fcNofoNIEkyfBSQgcYid/30OTjog3XoOjo6JMGuweQq5GRcJ6woPaKD6YyipYA/LWSkcZJcrCrWeCzP1LxDOwvjJwzHP3PGbFAzPoqaGoBQ42CmMOuDXOraRQjtv2DMWztMqaDK2sM10PzdvIyrip2dSh1J2JkttkvCrFFUwKPrXm7WZs/JIzdQD/txYQLOx6gcEpAnzD3UIjQpZQzrPCozhlgycVB/6YKz8dKNZTptFZY6TkvkBYDbhUWbq8OVUa2FFjGAF5OeZw5MJjvtkc4NRHNW4jnc4w2h4+BuGq56EneNMzK34PKe7b5QBnCFOmGfJsXxcOXavsTdn7jN+Xu/w2DwHqaWXMGaT5XrwGotj0f705BeV/jpetGpLtqXcWKJRU85UU7pfV4D+aaH5UwDl5WbtoY67S6M/ITlfay1NCf51R4UzzoRH6NkS4cL2cgPO7EftvaWArBq29GrOVlSF9c4nL7qfyTBL2xbEQ558tzvtlAUGavam+UXz7O5PPhk+0PCKoOKPlqLAl68uDFtGAt2dnca324yWckUXqtuV8L96EYktlTScFNB0Hr0YCgdsUg1cYng=
   file:
-    - "doot-doot-linux-x64.zip"
-    - "doot-doot-win32-x64.zip"
+    - "born-to-be-alive--unsigned.zip"
+    - "born-to-be-alive--unsigned.crx"
   skip_cleanup: true
   on:
     tags: true
